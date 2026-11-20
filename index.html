@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="icon" href="data:," />
+  <title>GrabPack VR — 테스트 룸</title>
+  <style>
+    html, body { margin: 0; height: 100%; background: #07080b; overflow: hidden; font-family: "Noto Sans KR", "Apple SD Gothic Neo", system-ui, sans-serif; color: #f2ead6; }
+    #app canvas { display: block; }
+    #overlay { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; background: radial-gradient(ellipse at center, rgba(20,30,48,0.88), rgba(4,5,8,0.97)); z-index: 10; }
+    #overlay.hidden, #hud.hidden { display: none; }
+    .card { width: min(560px, 92vw); padding: 32px 30px 26px; border-radius: 18px; background: #11151d; border: 1px solid #263044; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+    h1 { margin: 0 0 4px; font-size: 30px; letter-spacing: 0.5px; }
+    h1 .b { color: #4f8bff; } h1 .r { color: #ff4f4f; }
+    .sub { margin: 0 0 22px; color: #9aa6bb; font-size: 14px; }
+    .progress { height: 8px; background: #1d2433; border-radius: 6px; overflow: hidden; margin: 8px 0 6px; }
+    #bar { height: 100%; width: 0; background: linear-gradient(90deg, #4f8bff, #ff4f4f); transition: width 0.2s; }
+    #status { font-size: 13px; color: #9aa6bb; margin: 0 0 18px; }
+    #buttons { display: none; gap: 10px; flex-wrap: wrap; }
+    #buttons button, .vr-btn { font: inherit !important; font-size: 15px !important; font-weight: 700 !important; padding: 12px 20px !important; border-radius: 10px !important; border: 0 !important; cursor: pointer; opacity: 1 !important; width: auto !important; }
+    .vr-btn { background: #4f8bff !important; color: #fff !important; }
+    #desktop { background: #262e3f; color: #e8eefc; }
+    table { width: 100%; border-collapse: collapse; margin-top: 22px; font-size: 13px; }
+    td { padding: 5px 0; border-top: 1px solid #1f2736; vertical-align: top; }
+    td:first-child { color: #9aa6bb; width: 42%; }
+    .tag { display: inline-block; font-size: 11px; padding: 1px 7px; border-radius: 6px; background: #1d2433; margin-right: 4px; }
+    #hud { position: fixed; left: 50%; top: 50%; width: 6px; height: 6px; margin: -3px 0 0 -3px; border-radius: 50%; background: rgba(255,255,255,0.75); z-index: 5; pointer-events: none; }
+    #hud.paused::after { content: '클릭해서 계속 (ESC로 마우스 해제)'; position: fixed; left: 50%; top: 58%; transform: translateX(-50%); white-space: nowrap; font-size: 14px; background: rgba(0,0,0,0.6); padding: 6px 12px; border-radius: 8px; }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <div id="hud" class="hidden"></div>
+  <div id="overlay">
+    <div class="card">
+      <h1><span class="b">Grab</span><span class="r">Pack</span> VR</h1>
+      <p class="sub">메타 퀘스트 2 브라우저에서 열고 ENTER VR을 누르세요.</p>
+      <div class="progress"><div id="bar"></div></div>
+      <p id="status">모델 불러오는 중…</p>
+      <div id="buttons"><button id="desktop">PC에서 미리보기</button></div>
+      <table>
+        <tr><td><span class="tag">VR</span>트리거</td><td>손 발사 · 누르고 있으면 붙잡기 · 떼면 회수</td></tr>
+        <tr><td><span class="tag">VR</span>그립</td><td>붙잡은 곳으로 몸 끌어당기기 / 든 물건 내려놓기</td></tr>
+        <tr><td><span class="tag">VR</span>A / B (오른손)</td><td>손전등 / 플레어</td></tr>
+        <tr><td><span class="tag">VR</span>스틱</td><td>왼쪽 이동 · 오른쪽 스냅 회전</td></tr>
+        <tr><td><span class="tag">PC</span>마우스 좌/우 클릭</td><td>파란 손 / 빨간 손 (Q / E도 가능)</td></tr>
+        <tr><td><span class="tag">PC</span>WASD · F · G · Space</td><td>이동 · 손전등 · 플레어 · 끌어당기기</td></tr>
+      </table>
+    </div>
+  </div>
+  <script type="importmap">
+    { "imports": { "three": "./lib/three/three.module.js", "three/addons/": "./lib/three/addons/" } }
+  </script>
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>
